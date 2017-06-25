@@ -65,8 +65,6 @@ namespace EmotionsConsole
             var json = JArray.Parse(responseContent);
             string formatted = json.ToString();
             var something = JObject.Parse(responseContent);
-
-            jsonhelper helper = 
             
             Console.WriteLine(formatted);
             
