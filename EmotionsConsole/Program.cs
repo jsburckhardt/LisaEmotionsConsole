@@ -36,10 +36,10 @@ namespace EmotionsConsole
             }
 
             MakeRequest(test1, test2);
-            Console.ReadKey();
+            //Console.ReadKey();
         }
 
-        static async void MakeRequest(string imageFilePath, string cognitiveKey)
+        static void MakeRequest(string imageFilePath, string cognitiveKey)
         {
             
             var client = new HttpClient();
@@ -57,15 +57,13 @@ namespace EmotionsConsole
             using (var content = new ByteArrayContent(byteData))
             {
                 content.Headers.ContentType = new MediaTypeHeaderValue("application/octet-stream");
-                response = await client.PostAsync(uri, content);
+                response = client.PostAsync(uri, content).Result;
                 responseContent = response.Content.ReadAsStringAsync().Result;
             }
 
             //A peak at the JSON response.
             var json = JArray.Parse(responseContent);
             string formatted = json.ToString();
-            var something = JObject.Parse(responseContent);
-            
             Console.WriteLine(formatted);
             
         }
