@@ -1,14 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 //Libraries required for the API
 using System.IO;
 using System.Net.Http.Headers;
 using System.Net.Http;
 using Newtonsoft.Json.Linq;
+using Newtonsoft.Json;
 
 namespace EmotionsConsole
 {
@@ -65,7 +62,8 @@ namespace EmotionsConsole
             var json = JArray.Parse(responseContent);
             string formatted = json.ToString();
             Console.WriteLine(formatted);
-            
+
+            var result = JsonConvert.DeserializeObject<Emotion[]>(responseContent);
         }
         static byte[] GetImageAsByteArray(string imageFilePath)
         {
